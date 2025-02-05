@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagens Flexíveis</title>
+</head>
+
+<body>
+    <h1>Imagem dinamica</h1>
+    <picture>
+        <source media="(min-width: 1050px)" srcset="imagem/paisagem-g.png" type="image/png">
+        <source media="(min-width: 750px)" srcset="imagem/paisagem-m.png" type="image/png">
+        <source media="(min-width: 350px)" srcset="imagem/paisagem-p.png" type="image/png">
+
+        <img src="imagem/paisagem-g.png" alt="paisagem">
+
+        <source media="(min-width: 1050px)" srcset="" type="image/png">
+    </picture>
+    <h1>Reproduzir audio </h1>
+    <p>Vamos aprender a inserir audio</p>
+    <audio src="midia/happy-mistake.mp3" controls autoplay></audio>
+    <!--Compatibilidade com mp3 wav e ogg-->
+
+    <h1>Reprodução de vídeo</h1>
+    <p>Insersação de vídeo normal</p>
+    <video src="midia/vd.mp4" width="300" controls></video>
+
+    <p>Insersação de vídeo por parametro e img principal</p>
+
+    <p>
+        <video width="500" poster="imagem/limao.webp" controls>
+            <source src="midia/vd.mp4" type="video/mp4">
+        </video>
+    </p>
+
+    <h1>Inserindo video do youtube</h1>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/_XCH6l7BzrM?si=00GVwI_AH0bjALKT"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</body>
+
+</html>

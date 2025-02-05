@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Ano Novo 2025</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 20px 0;
+        }
+
+        #nameInputContainer {
+            margin-top: 50px;
+        }
+
+        #fireworksCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🎉 Bem-vindo ao Ano Novo 2025! 🎆</h1>
+    <div id="nameInputContainer">
+        <label for="nameInput">Digite o seu nome:</label>
+        <input type="text" id="nameInput" placeholder="Seu nome">
+        <button onclick="showNewYearMessage()">Enviar</button>
+    </div>
+    <h2 id="newYearMessage"></h2>
+    <canvas id="fireworksCanvas"></canvas>
+
+    <script>
+        // Função para exibir a mensagem de Ano Novo
+        function showNewYearMessage() {
+            const nameInput = document.getElementById('nameInput').value;
+            const messageContainer = document.getElementById('newYearMessage');
+            if (nameInput.trim() === '') {
+                alert('Por favor, insira seu nome.');
+                return;
+            }
+            messageContainer.innerHTML = `✨ Feliz Ano Novo 2025, ${nameInput}! Que este ano seja repleto de conquistas e alegrias! ✨`;
+            document.getElementById('nameInputContainer').style.display = 'none';
+            startFireworks();
+        }
+
+        // Animação de fogos de artifício
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        class Firework {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.sparks = [];
+                for (let i = 0; i < 50; i++) {
+                    this.sparks.push({
+                        x: this.x,
+                        y: this.y,
+                        dx: random(-3, 3),
+                        dy: random(-3, 3),
+                        life: random(50, 100),
+                    });
+                }
+            }
+            update() {
+                this.sparks.forEach((spark) => {
+                    spark.x += spark.dx;
+                    spark.y += spark.dy;
+                    spark.life--;
+                });
+                this.sparks = this.sparks.filter((spark) => spark.life > 0);
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                this.sparks.forEach((spark) => {
+                    ctx.beginPath();
+                    ctx.arc(spark.x, spark.y, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+            }
+        }
+
+        const fireworks = [];
+
+        function startFireworks() {
+            setInterval(() => {
+                const x = random(0, canvas.width);
+                const y = random(0, canvas.height / 2);
+                const color = `hsl(${random(0, 360)}, 100%, 60%)`;
+                fireworks.push(new Firework(x, y, color));
+            }, 500);
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                fireworks.forEach((firework, index) => {
+                    firework.update();
+                    firework.draw();
+                    if (firework.sparks.length === 0) fireworks.splice(index, 1);
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+    </script>
+</body>
+
+</html>

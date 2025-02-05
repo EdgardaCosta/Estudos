@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+/* Define a fonte padrão para todos os elementos */
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove preenchimentos padrão */
+    box-sizing: border-box; /* Para facilitar cálculos de largura/altura */
+}
+
+/* Estilo do corpo da página */
+body {
+    background: linear-gradient(to right, #9cfffa, #fdca40); /* Forma mais concisa */
+    min-height: 100vh; /* Garante que o corpo ocupa a altura total da janela */
+}
